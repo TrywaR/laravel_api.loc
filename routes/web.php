@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
 });
 
 // Route::get('/services', [ServiceController])
-Route::view('/services', 'services');
+// Route::view('/services', 'services');
+Route::get('/services', function () {
+    return Inertia::render('Services');
+})->name('Services');
 
 require __DIR__.'/auth.php';
