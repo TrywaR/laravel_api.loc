@@ -22,7 +22,7 @@
     "tailwindcss": "^3.2.1",
     "vite": "^4.0.0"
   },
-  "name": "www",
+  "name": "laravel_api",
   "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
   "version": "1.0.0",
   "main": "postcss.config.js",
@@ -158,6 +158,14 @@
     "yaml": "^2.3.4"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "TrywaR",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrywaR/laravel_api.loc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TrywaR/laravel_api.loc/issues"
+  },
+  "homepage": "https://github.com/TrywaR/laravel_api.loc#readme"
 }

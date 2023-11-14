@@ -21,7 +21,7 @@ class ServiceController extends Controller
         $service = Service::find($id);
 
         if (!$service) {
-            return response()->json(['error' => 'Book not found'], 404);
+            return response()->json(['error' => 'Service not found'], 404);
         }
 
         return response()->json(['data' => $service], 200);
@@ -31,8 +31,7 @@ class ServiceController extends Controller
     {
         $request->validate([
             'title' => 'required|string',
-            'author' => 'required|string',
-            'published_at' => 'required|date',
+            'description' => 'required|string',
         ]);
 
         $service = Service::create($request->all());
@@ -45,13 +44,12 @@ class ServiceController extends Controller
         $service = Service::find($id);
 
         if (!$service) {
-            return response()->json(['error' => 'Book not found'], 404);
+            return response()->json(['error' => 'Service not found'], 404);
         }
 
         $request->validate([
             'title' => 'required|string',
-            'author' => 'required|string',
-            'published_at' => 'required|date',
+            'description' => 'text',
         ]);
 
         $service->update($request->all());
@@ -64,11 +62,11 @@ class ServiceController extends Controller
         $service = Service::find($id);
 
         if (!$service) {
-            return response()->json(['error' => 'Book not found'], 404);
+            return response()->json(['error' => 'Service not found'], 404);
         }
 
         $service->delete();
 
-        return response()->json(['message' => 'Book deleted'], 200);
+        return response()->json(['message' => 'Service deleted'], 200);
     }
 }

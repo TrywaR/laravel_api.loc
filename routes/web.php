@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Api\ServiceController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,10 +36,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::get('/services', [ServiceController])
+// Route::get('/services', [ServiceController]);
 // Route::view('/services', 'services');
 Route::get('/services', function () {
     return Inertia::render('Services');
-})->name('Services');
+})->name('services');
+
+Route::post('/services', [ServiceController::class, 'store']);
+// Route::middleware('auth')->group(function () {
+//     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
+//     // Route::get('/services', [ServiceController::class, 'edit'])->name('services.edit');
+//     // Route::patch('/services', [ServiceController::class, 'update'])->name('services.update');
+//     // Route::delete('/services', [ServiceController::class, 'destroy'])->name('services.destroy');
+// });
 
 require __DIR__.'/auth.php';

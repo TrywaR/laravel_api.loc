@@ -32,13 +32,19 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     )}
                 </div>
 
-                <div>
-                    <Link
-                        href={route('Services')}
-                        className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                    >
-                        Go to Services
-                    </Link>
+                <div class="text-white">
+                    {auth.user ? (
+                        <Link
+                            href={route('services')}
+                            className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                        >
+                            Go to Services
+                        </Link>
+                    ) : (
+                        <>
+                            Login or register
+                        </>
+                    )}
                 </div>
             </div>
         </>
