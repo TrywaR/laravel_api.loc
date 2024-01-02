@@ -1,21 +1,19 @@
+
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-export default function Dashboard({ auth }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        title: '',
-        description: '',
-    });
-
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route('services'));
-    };
+export default function App({ auth }) {
+    const [arrServices, setData] = useState([]);
+    useEffect(() => {
+        axios.get('/api/services/') // замените на свой URL API
+            .then(response => {
+                const arrServices = response.data
+                setData(arrServices.data)
+            })
+            .catch(error => console.error('Ошибка получения данных:', error));
+    }, []);
 
     return (
         <AuthenticatedLayout
@@ -24,44 +22,15 @@ export default function Dashboard({ auth }) {
         >
             <Head title="Services" />
 
-            <form onSubmit={submit} className='w-80 mt-4 rounded-md p-4 ml-auto mr-auto py-5 divide-gray-200 shadow flex flex-col bg-gray-800'>
-                <div>
-                    <InputLabel htmlFor="title" value="Title" />
-
-                    <TextInput
-                        id="title"
-                        name="title"
-                        value={data.title}
-                        className="mt-1 block w-full"
-                        isFocused={true}
-                        onChange={(e) => setData('title', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.title} className="mt-2" />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="description" value="Description" />
-
-                    <TextInput
-                        id="description"
-                        name="description"
-                        value={data.description}
-                        className="mt-1 block w-full"
-                        onChange={(e) => setData('description', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.description} className="mt-2" />
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Add
-                    </PrimaryButton>
-                </div>
-            </form>
+            <div class="w-80 py-4 ml-auto mr-auto">
+                {arrServices.map(item => (
+                    <div class="py-3 px-3 shadow flex flex-col mb-4">
+                        {item.title}
+                        <br />
+                        <small>{item.description}</small>
+                    </div>
+                ))}
+            </div>
         </AuthenticatedLayout>
     );
 }
