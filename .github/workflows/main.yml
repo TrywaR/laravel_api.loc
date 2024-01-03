@@ -1,0 +1,26 @@
+name: Deploy to Master
+
+# on:
+#   workflow_dispatch:  # Триггер для запуска вручную
+  
+on:
+  workflow_dispatch:  # Триггер для запуска вручную
+  # push:
+  #   branches:
+  #     - beta  # Укажите вашу основную ветку
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Test Server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.BETA_FTP_SERVER }}
+          username: ${{ secrets.BETA_FTP_USERNAME }}
+          password: ${{ secrets.BETA_FTP_PASSWORD }}
+          local-dir: ./public/
